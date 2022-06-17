@@ -59,4 +59,8 @@ interface ClubeDeVantagensController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = ["/cartao/{idCartao}"])
     fun detalhesCartaoFidelidadeById(@PathVariable("idCartao") id: String?): ResponseEntity<*>?
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping(path = ["/stampcard/{id}"])
+    fun carimbar(@PathVariable("id") idCarimbo: String?): ResponseEntity<*>?
 }

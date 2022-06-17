@@ -13,7 +13,7 @@ class CarimboRequest {
 
     private var idUsuario: String? = null
 
-    private var qtdCarimbos: Int? = null
+    private var qtdCarimbos: Int = 0
 
     fun getIdUsuario(): String? {
         return idUsuario
@@ -36,11 +36,11 @@ class CarimboRequest {
         this.idUsuario = idUsuario
     }
 
-    fun setQtdCarimbos(qtdCarimbos: Int?) {
+    fun setQtdCarimbos(qtdCarimbos: Int) {
         this.qtdCarimbos = qtdCarimbos
     }
 
-    fun CarimboRequest(idPromocao: String?, cpf: String?, qtdCarimbos: Int?, idUsuario: String?) {
+    fun CarimboRequest(idPromocao: String?, cpf: String?, qtdCarimbos: Int, idUsuario: String?) {
         this.idPromocao = idPromocao
         this.cpf = cpf
         this.qtdCarimbos = qtdCarimbos
@@ -48,6 +48,6 @@ class CarimboRequest {
     }
 
     fun toModel(): Carimbo? {
-        return Carimbo(idPromocao, idUsuario, qtdCarimbos, false)
+        return Carimbo(idPromocao, idUsuario, qtdCarimbos!!, false)
     }
 }

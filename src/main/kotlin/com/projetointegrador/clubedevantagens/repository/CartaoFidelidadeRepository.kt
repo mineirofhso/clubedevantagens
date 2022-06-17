@@ -7,4 +7,7 @@ import org.springframework.data.jpa.repository.Query
 interface CartaoFidelidadeRepository : JpaRepository<CartaoFidelidade?, String?> {
     @Query(value = "SELECT * FROM CARTAO_FIDELIDADE WHERE ID_USUARIO = ?1", nativeQuery = true)
     fun findByIdUsuario(idUsuario: String?): List<CartaoFidelidade?>?
+
+    @Query(value = "SELECT * FROM CARTAO_FIDELIDADE WHERE ID_USUARIO = ?1", nativeQuery = true)
+    fun findByIdUsuarioAndIdPromocao(idUsuario: String?, idPromocao: String?): CartaoFidelidade?
 }

@@ -10,10 +10,10 @@ class CartaoFidelidadeResponse(cartaoFidelidade: CartaoFidelidade) {
     var espacoCarimbado: Int
 
     init {
-        id = cartaoFidelidade.id.toString()
-        idPromocao = cartaoFidelidade.idPromocao.toString()
-        idUsuario = cartaoFidelidade.idUsuario.toString()
-        espacoCarimbado = cartaoFidelidade.espacoCarimbado!!
-        espacoTotal = cartaoFidelidade.espacoTotal!!
+        id = cartaoFidelidade.getId().toString()
+        idPromocao = cartaoFidelidade.getIdPromocao().toString()
+        idUsuario = cartaoFidelidade.getIdUsuario().toString()
+        espacoCarimbado = cartaoFidelidade.getEspacoCarimbado()
+        espacoTotal = cartaoFidelidade.getEspacoTotal()
     }
 }

@@ -12,7 +12,7 @@ class CartaoFidelidadeRequest {
     private val idUsuario: @NotNull String? = null
 
     @JsonProperty("espacoTotal")
-    private val espacoTotal: @NotNull Int? = null
+    private val espacoTotal: @NotNull Int = 0
     fun toModel(): CartaoFidelidade {
         return CartaoFidelidade(idPromocao, idUsuario, espacoTotal, 0)
     }

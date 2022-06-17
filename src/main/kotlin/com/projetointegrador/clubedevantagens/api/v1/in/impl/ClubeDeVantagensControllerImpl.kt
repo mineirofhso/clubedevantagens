@@ -20,7 +20,7 @@ import java.util.function.Consumer
 import javax.persistence.EntityManager
 
 @RestController
-class ClubeDeVantagensControllerImpl : ClubeDeVantagensController  {
+class ClubeDeVantagensControllerImpl : ClubeDeVantagensController {
 
     @Autowired
     private val empresaRepository: EmpresaRepository? = null
@@ -98,7 +98,7 @@ class ClubeDeVantagensControllerImpl : ClubeDeVantagensController  {
 
         val carimbo: Carimbo = carimboRequest.toModel()!!
         val carimboId = carimboRepository?.save(carimbo)
-        val urlResponse = "http://localhost:8080/v1/stampcard/" + carimboId!!.id
+        val urlResponse = "http://localhost:8181/v1/stampcard/" + carimboId!!.getId()
         return ResponseEntity.status(HttpStatus.CREATED).body(urlResponse)
     }
 
@@ -137,5 +137,35 @@ class ClubeDeVantagensControllerImpl : ClubeDeVantagensController  {
             ?: return ResponseEntity.notFound().build<Any>()
         val cartaoFidelidadeResponse = CartaoFidelidadeResponse(cartao)
         return ResponseEntity.status(HttpStatus.OK).body<Any>(cartaoFidelidadeResponse)
+    }
+
+    override fun carimbar(idCarimbo: String?): ResponseEntity<*>? {
+        val carimbo = carimboRepository!!.findById(idCarimbo!!)
+
+        if (carimbo.isEmpty)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Carimbo inexistente!!!")
+
+
+        if (carimbo.get().getUtilizado()!!)
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body("Carimbo já utilizado!!!")
+        val cartaoFidelidade: CartaoFidelidade = cartaoFidelidadeRepository?.findByIdUsuarioAndIdPromocao(
+            carimbo.get().getIdUsuario(), carimbo.get().getIdPromocao()
+        )
+            ?:
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Cartão Fidelidade Inexistente")
+        cartaoFidelidade.setEspacoCarimbado(
+            cartaoFidelidade.getEspacoCarimbado().plus(carimbo.get().getQuantidadeCarimbos()
+        ))
+
+        if (cartaoFidelidade.getEspacoCarimbado() >= cartaoFidelidade.getEspacoTotal()
+        ) cartaoFidelidade.setContemplado(true)
+        cartaoFidelidadeRepository.save(cartaoFidelidade)
+        carimbo.get().setUtilizado(true)
+        carimboRepository!!.save(carimbo.get())
+
+        return ResponseEntity.status(HttpStatus.OK).body("Cartão carimbado com sucesso!!!")
     }
 }
