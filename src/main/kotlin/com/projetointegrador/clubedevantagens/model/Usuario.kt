@@ -1,5 +1,6 @@
 package com.projetointegrador.clubedevantagens.model
 
+import org.apache.logging.log4j.util.Strings
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
@@ -73,7 +74,7 @@ class Usuario {
      var cpf: String? = null
      var email: String? = null
      var telefone: String? = null
-     var senha: String? = null
+     var senha: String = Strings.EMPTY
      var dataNascimento: LocalDate? = null
      var instanteCriacao: LocalDateTime? = null
 
@@ -82,7 +83,7 @@ class Usuario {
         cpf: String?,
         email: String?,
         telefone: String?,
-        senha: String?,
+        senha: String,
         dataNascimento: LocalDate?
     ) : super() {
         usuarioId = UUID.randomUUID().toString()

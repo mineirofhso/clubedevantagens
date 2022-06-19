@@ -1,5 +1,6 @@
 package com.projetointegrador.clubedevantagens.model
 
+import org.apache.logging.log4j.util.Strings
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -15,7 +16,7 @@ class Empresa {
 
     @Column(unique = true)
     var cnpj: String? = null
-    var senha: String? = null
+    var senha: String = Strings.EMPTY
     var contatoNome: String? = null
     var contatoTelefone: String? = null
     var contatoEmail: String? = null
@@ -27,7 +28,7 @@ class Empresa {
     constructor(
         razaoSocial: String?,
         cnpj: String?,
-        senha: String?,
+        senha: String,
         contatoNome: String?,
         contatoTelefone: String?,
         contatoEmail: String?
