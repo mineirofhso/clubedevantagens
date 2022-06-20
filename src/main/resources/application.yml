@@ -29,6 +29,7 @@ logging:
       springframework:
         security: DEBUG
         hibernate: DEBUG
-
+jwt:
+  secret: secret
 server:
   port: 8181 #set your port
