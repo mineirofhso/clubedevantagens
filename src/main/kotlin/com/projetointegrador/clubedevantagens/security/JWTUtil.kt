@@ -14,7 +14,7 @@ class JWTUtil {
     @Value("\${jwt.secret}")
     private lateinit var secret: String
 
-    private val expiration: Long = 60000
+    private val expiration: Long = 900000
 
     fun generateToken(username: String): String {
         return Jwts.builder()
