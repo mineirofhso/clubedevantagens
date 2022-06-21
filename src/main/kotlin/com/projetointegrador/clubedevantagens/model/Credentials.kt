@@ -1,4 +1,6 @@
 package com.projetointegrador.clubedevantagens.model
 
-class Credentials {
-}
+data class Credentials(
+    val usuario: String = "",
+    val senha: String = ""
+)

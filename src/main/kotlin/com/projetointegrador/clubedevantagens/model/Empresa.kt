@@ -16,7 +16,7 @@ class Empresa {
 
     @Column(unique = true)
     var cnpj: String? = null
-    var senha: String = Strings.EMPTY
+    var senha: String? = Strings.EMPTY
     var contatoNome: String? = null
     var contatoTelefone: String? = null
     var contatoEmail: String? = null

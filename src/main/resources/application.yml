@@ -32,3 +32,5 @@ logging:
 
 server:
   port: 8181 #set your port
+jwt:
+  secret: secret

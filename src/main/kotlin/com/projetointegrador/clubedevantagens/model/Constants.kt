@@ -1,4 +1,4 @@
 package com.projetointegrador.clubedevantagens.model
 
-class Constants {
-}
+const val authorization = "Authorization"
+const val bearer = "Bearer"

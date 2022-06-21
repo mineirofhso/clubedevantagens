@@ -1,5 +1,8 @@
 package com.projetointegrador.clubedevantagens.config
 
+import com.projetointegrador.clubedevantagens.security.JWTAuthenticationFilter
+import com.projetointegrador.clubedevantagens.security.JWTAuthorizationFilter
+import com.projetointegrador.clubedevantagens.security.JWTUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -19,10 +22,19 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     @Autowired
     private lateinit var userDetailsService: UserDetailsService
 
+    @Autowired
+    private lateinit var jwtUtil: JWTUtil
+
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().authorizeRequests()
             .antMatchers(HttpMethod.POST, "/v1/signup").permitAll()
             .anyRequest().authenticated()
+//            .and()
+//            .formLogin()
+//            .loginPage("/login")
+//            .permitAll()
+        http.addFilter(JWTAuthenticationFilter(authenticationManager(), jwtUtil = jwtUtil))
+        http.addFilter(JWTAuthorizationFilter(authenticationManager(), jwtUtil = jwtUtil, userDetailService = userDetailsService))
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
