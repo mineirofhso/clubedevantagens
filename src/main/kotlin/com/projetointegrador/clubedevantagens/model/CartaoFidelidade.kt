@@ -1,5 +1,7 @@
 package com.projetointegrador.clubedevantagens.model
 
+import org.apache.logging.log4j.util.Strings
+import java.time.LocalDate
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -16,16 +18,26 @@ class CartaoFidelidade {
 
     private var contemplado: Boolean? = null
 
+    var empresa: String = Strings.EMPTY
+
+    var validade: LocalDate = LocalDate.now()
+
+    var descricao: String = Strings.EMPTY
+
     @Deprecated("")
     constructor() {
     }
 
-    constructor(idPromocao: String?, idUsuario: String?, espacoTotal: Int, espacoCarimbado: Int) {
+    constructor(idPromocao: String?, idUsuario: String?, espacoTotal: Int, espacoCarimbado: Int,
+    empresa: String, validade: LocalDate, descricao: String) {
         id = UUID.randomUUID().toString()
         this.idPromocao = idPromocao
         this.idUsuario = idUsuario
         this.espacoTotal = espacoTotal
         this.espacoCarimbado = espacoCarimbado
+        this.descricao = descricao
+        this.validade = validade
+        this.empresa = empresa
     }
 
     fun setContemplado(contemplado: Boolean?) {
