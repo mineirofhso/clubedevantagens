@@ -1,10 +1,10 @@
 package com.projetointegrador.clubedevantagens.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.projetointegrador.clubedevantagens.model.Credentials
 import com.projetointegrador.clubedevantagens.model.UserDetailsImpl
-import com.projetointegrador.clubedevantagens.model.authorization
-import com.projetointegrador.clubedevantagens.model.bearer
+
 
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -16,7 +16,10 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 
-class JWTAuthenticationFilter: UsernamePasswordAuthenticationFilter {
+class JWTAuthenticationFilter : UsernamePasswordAuthenticationFilter {
+
+    data class TokenResponse(var token: String)
+
 
     private var jwtUtil: JWTUtil
 
@@ -37,10 +40,25 @@ class JWTAuthenticationFilter: UsernamePasswordAuthenticationFilter {
         }
     }
 
-    override fun successfulAuthentication(request: HttpServletRequest?, response: HttpServletResponse, chain: FilterChain?, authResult: Authentication) {
-        val username = (authResult.principal as UserDetailsImpl).username
-        val token = jwtUtil.generateToken(username)
-        response.addHeader(authorization, "$bearer $token")
+    override fun successfulAuthentication(
+        request: HttpServletRequest?,
+        response: HttpServletResponse,
+        chain: FilterChain?,
+        authResult: Authentication
+    ) {
+        val user = (authResult.principal as UserDetailsImpl)
+        val token = jwtUtil.generateToken(user.username)
+//        response.addHeader(authorization, "$bearer $token")
+
+        val mapper = jacksonObjectMapper()
+
+        val tokenResponse = TokenResponse(token)
+
+        val tokenJson = mapper.writeValueAsString(tokenResponse)
+
+
+        response.writer.write(tokenJson);
+        response.writer.flush();
     }
 
 }
