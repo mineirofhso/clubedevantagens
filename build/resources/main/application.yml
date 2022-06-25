@@ -33,3 +33,5 @@ jwt:
   secret: secret
 server:
   port: 8181 #set your port
+jwt:
+  secret: secret

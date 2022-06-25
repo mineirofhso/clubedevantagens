@@ -29,11 +29,11 @@ class UsuarioService() : UserDetailsService {
 
         return if (usuarioRequest.cpfcnpj?.length?.equals(11) == true) {
             val usuario = usuarioRequest.toUsuario()
-            usuario.senha = encriptaSenha(usuario.senha)
+            usuario.senha = encriptaSenha(usuario.senha!!)
             createUsuario(usuario)
         } else {
             val empresa = usuarioRequest.toEmpresa()
-            empresa.senha = encriptaSenha(empresa.senha)
+            empresa.senha = encriptaSenha(empresa.senha!!)
             createEmpresa(empresa)
         }
     }

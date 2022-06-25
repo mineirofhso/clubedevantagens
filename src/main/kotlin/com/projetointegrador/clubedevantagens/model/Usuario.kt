@@ -74,7 +74,7 @@ class Usuario {
      var cpf: String? = null
      var email: String? = null
      var telefone: String? = null
-     var senha: String = Strings.EMPTY
+     var senha: String? = Strings.EMPTY
      var dataNascimento: LocalDate? = null
      var instanteCriacao: LocalDateTime? = null
 

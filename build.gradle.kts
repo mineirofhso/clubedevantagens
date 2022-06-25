@@ -29,6 +29,8 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	implementation ("org.springframework.boot:spring-boot-starter-security")
 	testImplementation ("org.springframework.security:spring-security-test")
+	implementation("io.jsonwebtoken:jjwt:0.9.1")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
 //	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
