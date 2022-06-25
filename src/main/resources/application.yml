@@ -31,6 +31,6 @@ logging:
         hibernate: DEBUG
 
 server:
-  port: 8181 #set your port
+  port: $PORT #set your port
 jwt:
   secret: secret
