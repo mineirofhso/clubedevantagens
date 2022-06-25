@@ -41,11 +41,7 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
-tasks.withType<Jar> {
-	manifest {
-		attributes["Main-Class"] = "com.projetointegrador.clubedevantagens.ClubedevantagensApplication"
-	}
-}
+
 
 tasks.withType<Test> {
 	useJUnitPlatform()
