@@ -1,1 +1,1 @@
-web: java -jar -Dserver.port=8181 build/libs/*.jar
+java -jar build/libs/*.jar --server.port=$PORT
