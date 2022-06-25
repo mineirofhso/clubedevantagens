@@ -145,7 +145,7 @@ class ClubeDeVantagensControllerImpl : ClubeDeVantagensController {
     override fun carimbar(idCarimbo: String?): ResponseEntity<*>? {
         val carimbo = carimboRepository!!.findById(idCarimbo!!)
 
-        if (carimbo.isEmpty)
+        if (!carimbo.isPresent)
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("Carimbo inexistente!!!")
 
