@@ -99,7 +99,10 @@ class ClubeDeVantagensControllerImpl : ClubeDeVantagensController {
         val carimbo: Carimbo = carimboRequest.toModel()!!
         val carimboId = carimboRepository?.save(carimbo)
         val urlResponse = "http://localhost:8181/v1/stampcard/" + carimboId!!.getId()
-        return ResponseEntity.status(HttpStatus.CREATED).body(urlResponse)
+        val map = HashMap<String, String>().apply {
+            put("urlCarimbo", urlResponse)
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(map)
     }
 
     override fun buscarEmpresa(cnpj: String?): ResponseEntity<*>? {
