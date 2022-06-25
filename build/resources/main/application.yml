@@ -9,9 +9,9 @@ spring:
   # Database
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/clube
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://ec2-34-201-95-176.compute-1.amazonaws.com:5432/d9jed17qo1ks37
+    username: xffnpwvmjjikip
+    password: b32c58e618dc4ceb9d6e27515e3620b3bc1e6a63591fdb9ebe4b5e3f21141fb9
   # JPA properties
   jpa:
     hibernate:

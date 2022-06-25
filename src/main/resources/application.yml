@@ -9,9 +9,9 @@ spring:
   # Database
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://ec2-34-200-35-222.compute-1.amazonaws.com:5432/d10bmfrf4pll3v
-    username: cjmufnawoddmtx
-    password: 1d743961b73f6681cdf8b93b5418db4c0699ad4cc870a839f23dcd72b235ba1e
+    url: jdbc:postgresql://ec2-34-201-95-176.compute-1.amazonaws.com:5432/d9jed17qo1ks37
+    username: xffnpwvmjjikip
+    password: b32c58e618dc4ceb9d6e27515e3620b3bc1e6a63591fdb9ebe4b5e3f21141fb9
   # JPA properties
   jpa:
     hibernate:
