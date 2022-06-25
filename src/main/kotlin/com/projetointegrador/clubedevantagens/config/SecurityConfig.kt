@@ -29,10 +29,13 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         http.csrf().disable().authorizeRequests()
             .antMatchers(HttpMethod.POST, "/v1/signup").permitAll()
             .anyRequest().authenticated()
+<<<<<<< HEAD
 //            .and()
 //            .formLogin()
 //            .loginPage("/login")
 //            .permitAll()
+=======
+>>>>>>> 645ea7d72096deac3b0d3916349d34272dcc6a5a
         http.addFilter(JWTAuthenticationFilter(authenticationManager(), jwtUtil = jwtUtil))
         http.addFilter(JWTAuthorizationFilter(authenticationManager(), jwtUtil = jwtUtil, userDetailService = userDetailsService))
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

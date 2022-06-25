@@ -20,7 +20,7 @@ class UsuarioRequest {
 
     @NotBlank
     @JsonProperty("cpfcnpj")
-    val cpfcnpj: String? = null
+    val cpfcnpj: String = Strings.EMPTY
 
     @Email
     @JsonProperty("email")

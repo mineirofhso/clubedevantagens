@@ -12,6 +12,8 @@ group = "com.projetointegrador"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
+
+
 repositories {
 	mavenCentral()
 }
@@ -32,6 +34,13 @@ dependencies {
 //	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+dependencies {
+	implementation ("io.jsonwebtoken:jjwt-api:0.11.5")
+	runtimeOnly ("io.jsonwebtoken:jjwt-impl:0.11.5")
+	// Uncomment the next line if you want to use RSASSA-PSS (PS256, PS384, PS512) algorithms:
+	//'org.bouncycastle:bcprov-jdk15on:1.70',
+	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5") // or 'io.jsonwebtoken:jjwt-gson:0.11.5' for gson
 }
 
 tasks.withType<KotlinCompile> {

@@ -6,11 +6,13 @@ import com.projetointegrador.clubedevantagens.model.Usuario
 import com.projetointegrador.clubedevantagens.repository.EmpresaRepository
 import com.projetointegrador.clubedevantagens.repository.UsuarioRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UsuarioService {
+class UsuarioService() : UserDetailsService {
 
     @Autowired
     private lateinit var userRepository: UsuarioRepository
@@ -21,7 +23,6 @@ class UsuarioService {
     @Autowired
     @org.springframework.context.annotation.Lazy
     private lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
-
 
 
     fun criaUsuario(usuarioRequest: UsuarioRequest): Any {
@@ -46,7 +47,18 @@ class UsuarioService {
         return userRepository.save(usuario)
     }
 
-    private fun encriptaSenha(senha: String) :String {
-       return bCryptPasswordEncoder.encode(senha)
+    private fun encriptaSenha(senha: String): String {
+        return bCryptPasswordEncoder.encode(senha)
+    }
+
+    override fun loadUserByUsername(login: String): UserDetails {
+        var usuario = Usuario()
+        var empresa = Empresa()
+        if (login.length == 11) {
+            usuario = userRepository.findBycpf(login) ?: throw RuntimeException()
+        } else {
+           empresa =  empresaRepository.findByCnpj(login) ?: throw RuntimeException()
+        }
+        return UserDetailsImpl(usuario, empresa)
     }
 }
