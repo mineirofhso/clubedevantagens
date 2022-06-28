@@ -15,6 +15,12 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.header.writers.StaticHeadersWriter
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+
+
+
 
 
 @Configuration
@@ -28,7 +34,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     private lateinit var jwtUtil: JWTUtil
 
     override fun configure(http: HttpSecurity) {
-        http.cors().and().csrf().disable().authorizeRequests()
+        http.csrf().disable().authorizeRequests()
             .antMatchers(HttpMethod.POST, "/v1/signup").permitAll()
             .anyRequest().authenticated()
 //            .and()
@@ -43,12 +49,21 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 userDetailService = userDetailsService
             )
         )
-        http.headers().addHeaderWriter(
-            StaticHeadersWriter("Access-Control-Allow-Origin", "*")
-                ).and()
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        http.cors()
+//        http.headers().addHeaderWriter(
+//            StaticHeadersWriter("Access-Control-Allow-Origin", "https://pi-angular.herokuapp.com/")
+//                ).and()
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
+    @Bean
+    fun corsConfigurer(): WebMvcConfigurer? {
+        return object : WebMvcConfigurer {
+            override fun addCorsMappings(registry: CorsRegistry) {
+                registry.addMapping("/**").allowedOrigins("https://pi-angular.herokuapp.com/")
+            }
+        }
+    }
     @Bean
     fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()
