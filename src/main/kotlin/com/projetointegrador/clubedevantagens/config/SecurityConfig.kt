@@ -60,10 +60,11 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     fun corsConfigurer(): WebMvcConfigurer? {
         return object : WebMvcConfigurer {
             override fun addCorsMappings(registry: CorsRegistry) {
-                registry.addMapping("/**").allowedOrigins("https://pi-angular.herokuapp.com/")
+                registry.addMapping("/**").allowedOrigins("https://pi-angular.herokuapp.com/", "http://192.168.0.15:4200")
             }
         }
     }
+
     @Bean
     fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()
